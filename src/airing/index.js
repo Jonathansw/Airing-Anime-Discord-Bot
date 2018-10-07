@@ -19,10 +19,10 @@ query($begin: Int, $end: Int) {
 }
 `;
 
-
+//subtract a day 86400000
 const variables = {
-  begin: Math.floor(new Date().setHours(0,0,0,0) / 1000),
-  end: Math.floor(new Date().setHours(23,59,59,999) / 1000)
+  begin: Math.floor((new Date().setHours(0,0,0,0) - 86400000) / 1000),
+  end: Math.floor((new Date().setHours(23,59,59,999) - 86400000) / 1000)
 }
 
 var addZero = (i) => {
