@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
+//const config = require('./config.json');
 
 const airing = require('./airing');
 
@@ -19,7 +19,7 @@ bot.on('ready', () => {
 
 bot.on('message', async (message) => {
   if (message.author.bot) return;
-  if(message.content.indexOf(process.env.PREFIX || config.prefix) !== 0) return;
+  if(message.content.indexOf(process.env.PREFIX /*|| config.prefix*/) !== 0) return;
 
   let command = message.content.slice(1).toLowerCase();
   let response = [];
@@ -46,4 +46,4 @@ bot.on('message', async (message) => {
   }
 });
 
-bot.login(process.env.TOKEN || config.token);
+bot.login(process.env.TOKEN /*|| config.token*/);
