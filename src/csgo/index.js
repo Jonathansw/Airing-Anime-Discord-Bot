@@ -17,7 +17,7 @@ var fields = (csgo) => {
   if(csgo.length === 0) {
     output.push({
       name: "No ESL/ECS NA or EU games today",
-      value: "",
+      value: "Try again tomorrow",
     })
   }
   for(let i in csgo) {
