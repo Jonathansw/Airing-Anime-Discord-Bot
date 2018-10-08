@@ -1,10 +1,9 @@
 const api = require('../api');
 const maps = require('./maps');
 
-//subtract a day 86400000
 const time = {
-  begin: Math.floor((new Date().setHours(0,0,0,0) - 86400000)),
-  end: Math.floor((new Date().setHours(23,59,59,999) - 86400000)),
+  begin: Math.floor((new Date().setHours(0,0,0,0))),
+  end: Math.floor((new Date().setHours(23,59,59,999))),
 }
 
 var pro = (league) => {
