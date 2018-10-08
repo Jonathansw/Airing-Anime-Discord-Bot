@@ -1,15 +1,22 @@
 const Discord = require('discord.js');
 //const config = require('./config.json');
 
-const airing = require('./airing');
+const anime = require('./anime');
+const csgo = require('./csgo');
 
 const bot = new Discord.Client();
 
 const help = {
   title: "Commands",
   description: `
-    Anime coming out today: !today or !t
+    Anime coming out today: !anime or !a
+    Pro CSGO matches happening today !csgo
   `
+}
+
+const cs = {
+  title: "Counter Strike matches today",
+  fields: [],
 }
 
 
@@ -23,15 +30,20 @@ bot.on('message', async (message) => {
 
   let command = message.content.slice(1).toLowerCase();
   let response = [];
+  let matches = [];
   try {
     switch(command) {
       case "help":
         response.push(help)
         break;
-      case "t":
-      case "today":
-        response = await airing.search();
+      case "a":
+      case "airing":
+        response = await anime.search();
         break;
+      case "csgo":
+        matches = await csgo.search();
+        cs.fields = matches;
+        response.push(cs);
       default:
         break;
     }

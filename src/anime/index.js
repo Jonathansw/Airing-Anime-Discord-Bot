@@ -20,7 +20,7 @@ query($begin: Int, $end: Int) {
 `;
 
 //subtract a day 86400000
-const variables = {
+const time = {
   begin: Math.floor((new Date().setHours(0,0,0,0) - 86400000) / 1000),
   end: Math.floor((new Date().setHours(23,59,59,999) - 86400000) / 1000)
 }
@@ -40,9 +40,9 @@ var description = (time, url) => {
 
 var search = async () => {
   try {
-    const response = await api.fetch(query, variables);
+    const response = await api.anime(query, time);
     const data = response.Page.airingSchedules;
-    const anime = [];
+    let anime = [];
 
     for(let i in data) {
       const media = data[i].media;
@@ -61,9 +61,9 @@ var search = async () => {
     }
     return anime;
   } catch (error) {
-    console.log('Caught', error.message)
+    console.log('Caught', error)
   }
 
 }
 
-module.exports.search = search
+module.exports.search = search;

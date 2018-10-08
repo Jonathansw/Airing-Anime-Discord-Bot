@@ -1,12 +1,28 @@
 const { GraphQLClient } = require('graphql-request');
+const { HLTV } = require('hltv');
 
 const client = new GraphQLClient("https://graphql.anilist.co", {
   redirect: "follow"
 });
 
-var fetch = (query, variables) => {
+var anime = (query, variables) => {
   const data = client.request(query, variables)
   return data;
 }
 
-module.exports.fetch = fetch
+var csgo = async () => {
+  try {
+    const data = await HLTV.getMatches();
+    return data.splice(0,50);
+  } catch (error) {
+    console.log("Caught: " + error);
+  }
+
+}
+
+
+
+module.exports = {
+  anime,
+  csgo
+}
