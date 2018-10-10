@@ -11,6 +11,13 @@ var pro = (league) => {
   return ((league.indexOf("ECS Season") !== -1 || league.indexOf("ESL Pro League") !== -1) && (region));
 }
 
+var mapCheck = (code) => {
+  if(code in maps){
+    return maps[code];
+  }
+  return code;
+}
+
 var fields = (csgo) => {
   let output = [];
   if(csgo.length === 0) {
@@ -22,15 +29,15 @@ var fields = (csgo) => {
   for(let i in csgo) {
     let field = {};
     let map = csgo[i].map || csgo[i].maps;
-    let temp = [];
-    for(let j in map) {
-      if(map[j] in maps) {
-        temp.push(maps[map[j]]);
-      } else {
-        temp.push([map[j]]);
+    let mapTemp = [];
+    if(Array.isArray(map)) {
+      for(let j in map) {
+        mapTemp.push(mapCheck(map[j]));
       }
+    } else {
+      mapTemp.push(mapCheck(map));
     }
-    field['name'] = csgo[i].team1.name + " vs " + csgo[i].team2.name + " | Maps: [" + temp.toString() + "]";
+    field['name'] = csgo[i].team1.name + " vs " + csgo[i].team2.name + " | Maps: [" + mapTemp.toString() + "]";
     field['value'] = csgo[i].event.name;
     output.push(field);
   }

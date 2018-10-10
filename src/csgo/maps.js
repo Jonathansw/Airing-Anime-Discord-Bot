@@ -10,4 +10,4 @@ const maps = {
   "inf": "Inferno"
 }
 
-module.exports.maps = maps;
+module.exports = maps;
